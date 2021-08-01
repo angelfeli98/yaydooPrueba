@@ -23,9 +23,19 @@ const createTransaction = async (req: Request, res: Response): Promise<any> => {
 }
 
 const getTransactionByClient = async (req: Request, res: Response): Promise<any> => {
-    
+    try {
+        const { id } = req.params;
+        const transaction = await Transaction.find({ from: id }).populate({path: 'from'});
+        if (transaction) {
+            return res.status(200).json(transaction);
+        }
+        return res.status(404).json({message: 'No se han encontrado transacciones'});
+    } catch (error) {
+        return res.status(500).json(error);
+    }
 }
 
 export {
-    createTransaction
+    createTransaction,
+    getTransactionByClient
 }
