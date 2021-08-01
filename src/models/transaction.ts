@@ -9,8 +9,7 @@ const transactionSchema: mongoose.Schema = new mongoose.Schema(
         },
         from: {
             type: mongoose.Types.ObjectId,
-            ref: 'User',
-            required: [true, 'El origen es un campo obligatorio']
+            ref: 'User'
         },
         date: {
             type: Date,
@@ -21,8 +20,15 @@ const transactionSchema: mongoose.Schema = new mongoose.Schema(
         },
         to: {
             type: mongoose.Types.ObjectId,
-            ref: 'User',
-            required: [true, 'El destinatario es un campo obligatorio']
+            ref: 'User'
+        }
+    },
+    {
+        toJSON: {
+            transform: (doc, ret): any => {
+                const { _id, __v, ...data } = ret;
+                return {...data, id: _id};
+            }
         }
     }
 );

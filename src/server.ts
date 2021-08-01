@@ -3,6 +3,7 @@ import express, { Router } from "express";
 import cors from 'cors';
 import ConnectionDB from "./db/database";
 import userRouter from "./routes/user";
+import transactionRouter from "./routes/transaction";
 
 require('./config/config');
 
@@ -14,11 +15,13 @@ export default class Server{
     private server: express.Application;
     private databaseConnection: ConnectionDB;
     private userRouter: Router;
+    private transactionRouter: Router;
 
     constructor() {
         this.port = process.env.NODE_PORT;
         this.server = express();
         this.userRouter = userRouter;
+        this.transactionRouter = transactionRouter;
         this.databaseConnection = new ConnectionDB();
         this.configServer();
         this.runServer();
@@ -30,6 +33,7 @@ export default class Server{
         this.server.use(cors());
         this.server.use(express.json());
         this.server.use('/user', this.userRouter);
+        this.server.use('/transaction', this.transactionRouter);
     }
 
     private runServer = (): void  => {

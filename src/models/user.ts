@@ -11,6 +11,10 @@ const userSchema: mongoose.Schema = new mongoose.Schema(
             type: String,
             required: [true, 'La contraseña es un valor obligatorio']
         },
+        user: {
+            type: String,
+            required: [true, 'El usuario es un valor obligatorio']
+        },
         account: {
             type: mongoose.Types.ObjectId,
             ref: 'Account'
