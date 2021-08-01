@@ -1,0 +1,35 @@
+{
+  "name": "yaydooprueba",
+  "version": "1.0.0",
+  "description": "Prueba bcakend yaydoo",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/angelfeli98/yaydooPrueba.git"
+  },
+  "keywords": [
+    "Yaydoo",
+    "prueba"
+  ],
+  "author": "Felipe Regalado",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/angelfeli98/yaydooPrueba/issues"
+  },
+  "homepage": "https://github.com/angelfeli98/yaydooPrueba#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.5"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/crypto-js": "^4.0.2",
+    "@types/express": "^4.17.13",
+    "@types/mongoose": "^5.11.97"
+  }
+}
