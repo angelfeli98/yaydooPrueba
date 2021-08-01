@@ -18,7 +18,7 @@ export default class Server{
     private transactionRouter: Router;
 
     constructor() {
-        this.port = process.env.NODE_PORT;
+        this.port = process.env.PORT;
         this.server = express();
         this.userRouter = userRouter;
         this.transactionRouter = transactionRouter;
