@@ -22,6 +22,10 @@ const createTransaction = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
+const getTransactionByClient = async (req: Request, res: Response): Promise<any> => {
+    
+}
+
 export {
     createTransaction
 }

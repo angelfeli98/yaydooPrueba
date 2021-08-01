@@ -15,6 +15,14 @@ const accountSchema: mongoose.Schema = new mongoose.Schema(
             type: mongoose.Types.ObjectId,
             ref: 'Transaction'
         }]
+    },
+    {
+        toJSON: {
+            transform: (doc, ret): any => {
+                const { _id, __v, ...data } = ret;
+                return {...data, id: _id};
+            }
+        }
     }
 );
 

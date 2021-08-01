@@ -34,7 +34,20 @@ const deleteUser = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
+const getUsers = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const users = await User.find({}).populate({ path: 'account', populate: { path: 'transactions' } });
+        if (users) {
+            return res.status(200).json(users);
+        }
+        return res.status(404).json({message: 'Los clientes no se ha encontrado'});
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
+
 export {
     registerUser,
-    deleteUser
+    deleteUser,
+    getUsers
 }
