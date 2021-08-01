@@ -15,6 +15,10 @@ const userSchema: mongoose.Schema = new mongoose.Schema(
             type: String,
             required: [true, 'El usuario es un valor obligatorio']
         },
+        registrationDate: {
+            type: Date,
+            default: () => Date.now()
+        },
         account: {
             type: mongoose.Types.ObjectId,
             ref: 'Account'

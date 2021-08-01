@@ -5,7 +5,7 @@ const accountSchema: mongoose.Schema = new mongoose.Schema(
     {
         money: {
             type: Number,
-            default: 0
+            default: (): number => Math.round(Math.random() * 20000),
         },
         user: {
             type: mongoose.Types.ObjectId,

@@ -25,6 +25,7 @@ export default class Server{
         this.databaseConnection = new ConnectionDB();
         this.configServer();
         this.runServer();
+        // Se usa el patron singleton para garantizar una sola intancia de la clase servidor
         Server.server = Server.server ? Server.server : this;
         return Server.server;
     }

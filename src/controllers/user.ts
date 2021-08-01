@@ -25,6 +25,7 @@ const deleteUser = async (req: Request, res: Response): Promise<any> => {
         const { id } = req.params;
         const deletedUser = await User.findByIdAndDelete(id);
         if (deletedUser) {
+            // Se elimna la cuenta del usuario eliminado pero no sus transacciones
             await Account.findOneAndDelete({user: deletedUser._id});
             return res.status(200).json({message: 'Cliente eliminado'});
         }
@@ -34,9 +35,27 @@ const deleteUser = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
+const login = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const { user, password } = req.query
+        const client = await User.findOne({user});
+        
+        if (!client) {
+            return res.status(401).json({message: 'Usuario o contraseña incorrecta'})
+        } 
+
+
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+};
+
 const getUsers = async (req: Request, res: Response): Promise<any> => {
     try {
-        const users = await User.find({}).populate({ path: 'account', populate: { path: 'transactions' } });
+        const { date } = req.headers;
+        // La query se hace en base a si se pasa el parametro fecha
+        const query = date ? { registrationDate : { $gte: date }} : {};
+        const users = await User.find(query).populate({ path: 'account', populate: { path: 'transactions' } });
         if (users) {
             return res.status(200).json(users);
         }
@@ -49,5 +68,6 @@ const getUsers = async (req: Request, res: Response): Promise<any> => {
 export {
     registerUser,
     deleteUser,
-    getUsers
+    getUsers,
+    login
 }
