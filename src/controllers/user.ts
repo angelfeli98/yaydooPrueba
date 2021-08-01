@@ -2,6 +2,7 @@
 import { Response, Request } from 'express';
 import User from '../models/user';
 import Account from '../models/account';
+import crypto from 'crypto-js';
 
 const registerUser = async (req: Request, res: Response): Promise<any> => {
     try {
@@ -41,10 +42,14 @@ const login = async (req: Request, res: Response): Promise<any> => {
         const client = await User.findOne({user});
         
         if (!client) {
-            return res.status(401).json({message: 'Usuario o contraseña incorrecta'})
+            return res.status(401).json({message: 'Usuario o contraseña incorrecta'});
         } 
+        
+        if (client.get('password') !== password) {
+            return res.status(401).json({message: 'Usuario o contraseña incorrecta'})
+        }
 
-
+        return res.status(200).json(client);
     } catch (error) {
         return res.status(500).json(error);
     }
@@ -65,9 +70,20 @@ const getUsers = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
+const crypt = (req: Request, res: Response): any => {
+    try {
+        const data: any = req.query.data;
+        const encrypt = crypto.MD5(data).toString();
+        return res.status(200).json({ data: encrypt }) 
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
+
 export {
     registerUser,
     deleteUser,
     getUsers,
-    login
+    login,
+    crypt
 }
