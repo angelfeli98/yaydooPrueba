@@ -15,6 +15,14 @@ const userSchema: mongoose.Schema = new mongoose.Schema(
             type: mongoose.Types.ObjectId,
             ref: 'Account'
         }
+    },
+    {
+        toJSON: {
+            transform: (doc, ret): any => {
+                const { _id, __v, password, ...data } = ret;
+                return {...data, id: _id};
+            }
+        }
     }
 );
 
