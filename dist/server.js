@@ -21,7 +21,7 @@ class Server {
             this.databaseConnection.makeConnectios();
             this.server.listen(this.port, () => console.log(`Servidor corriendo en http://localhost:${this.port}`));
         };
-        this.port = process.env.NODE_PORT;
+        this.port = process.env.PORT;
         this.server = express_1.default();
         this.userRouter = user_1.default;
         this.transactionRouter = transaction_1.default;

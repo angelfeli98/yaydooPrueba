@@ -1,2 +1,2 @@
 "use strict";
-process.env.NODE_PORT = process.env.NODE_PORT || '1313';
+process.env.PORT = process.env.PORT || '1313';
